@@ -1,0 +1,99 @@
+package tree;
+
+import java.util.Scanner;
+
+public class CreateTree {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int selection = 3;
+		while (selection > 2 || selection < 1) {
+			System.out.println("Select holiday item to build: ");
+			System.out.println("1 - Christmas Tree");
+			System.out.println("2 - Menorah");
+			selection = Integer.parseInt(scan.nextLine());
+		}
+		if (selection == 1) {
+			buildTree();
+		} else {
+			buildMenorah();
+		}
+		scan.close();
+	}	
+	
+	private static void buildMenorah() {
+		Scanner scan = new Scanner(System.in);
+		int nights = 42;
+		while (nights > 8 || nights < 1) {
+			System.out.print("Which night of Hanukkah are you celebrating (Max 8)? ");
+			nights = Integer.parseInt(scan.nextLine());
+		}
+		System.out.println();
+		genSpaces(7);
+		System.out.println("&");
+		int flames = nights + 1;
+		for (int i = 1; i < 9; i++) {
+			flames--;
+			if (flames > 0) {
+				System.out.print("&");
+				System.out.print(" ");
+			} else {
+				System.out.print("  ");
+			}
+			if (i == 4) {
+				System.out.print("| ");
+			}
+		}
+		System.out.print('\n');
+		System.out.println("| | | | | | | | |");
+		System.out.println("|_|_|_|_|_|_|_|_|");
+		System.out.println("       _|_");
+		scan.close();
+		
+	}
+
+	private static void buildTree() {
+		Scanner scan = new Scanner(System.in);
+		int totalLevels = 26;
+		while (totalLevels > 25) {
+			System.out.print("How many levels of tree would you like (Max 25)?");
+			totalLevels = Integer.parseInt(scan.nextLine());
+		}
+		int stars = 0;
+		for (int currLevel=totalLevels; currLevel > -1; currLevel--) {
+			genSpaces(currLevel - 1);
+			genStars(stars);
+			stars += 2;
+		}
+		int branch = totalLevels / 5;
+		if (branch < 1) {
+			branch = 1;
+		}
+		for (int i = 1; i <= branch; i++) {
+			genSpaces(totalLevels - 3);
+			System.out.println("###");
+		}
+		
+		System.out.println();
+		System.out.println("Merry Christmas, Happy Hanukkah, and Happy Festivus to all of my Java developin' peeps!");
+		scan.close();
+	}
+		
+
+	private static void genSpaces(int noSpaces) {
+		String spaces = "";
+		for (int i=0; i <= noSpaces; i++) {
+			spaces += " ";
+		}
+		System.out.print(spaces);
+	}
+	
+		private static void genStars(int noStars) {
+			String stars = "";
+			for (int i=1; i < noStars; i++) {
+				stars += "*";
+			}
+			System.out.println(stars);
+		}
+
+}
